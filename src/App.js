@@ -7,6 +7,7 @@ import Header from './Header';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 
 function App() { 
+  const [singleclk, setSingleclk] = useState(false);
   const [store, setStore] = useState({
     title:"",
     data:""
@@ -42,20 +43,25 @@ function App() {
         return  index !== id;
       })
     })
+  }
 
+  const edit = () =>{
+    setSingleclk(true)
+  }
+
+  const bcktonor = () => {
+    setSingleclk(false)
   }
   return (
     <>
       <Header/>
-      <div className="Mainbox">
+      <div className="Mainbox" onDoubleClick={bcktonor}>
         <form action="">
-          <input type="text" name='title' onChange={inputEvent} value={store.title} placeholder='Title' />
-          <textarea name="data" id="" onChange={inputEvent} value={store.data} placeholder='Write Your Note Here...' cols="" rows=""></textarea>
-          <span className='AddIcon' onClick={Addbtn}>
-            {/* <Button variant="outlined" className='btnpro'> */}
+          {singleclk?<input type="text" name='title' onChange={inputEvent} value={store.title} placeholder='Title' />:null}
+          <textarea name="data" id="" onChange={inputEvent} value={store.data} placeholder='Write Your Note Here...' cols="" rows="" onClick={edit}></textarea>
+          {singleclk?<span className='AddIcon' onClick={Addbtn}>
               <AddBoxIcon />
-            {/* </Button> */}
-          </span>
+          </span>:null}
         </form>
       </div>
       <div className="Mid">

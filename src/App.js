@@ -5,6 +5,8 @@ import Footer from './Footer';
 import Header from './Header';
 // import Button from '@mui/material/Button';
 import AddBoxIcon from '@mui/icons-material/AddBox';
+import Videosbackground from './Ink - 67358.mp4';
+
 
 function App() { 
   const [singleclk, setSingleclk] = useState(false);
@@ -55,7 +57,9 @@ function App() {
   return (
     <>
       <Header/>
+      <video src={Videosbackground} className='bgvideo' autoPlay muted loop></video>
       <div className="Mainbox" onDoubleClick={bcktonor}>
+        
         <form action="">
           {singleclk?<input type="text" name='title' onChange={inputEvent} value={store.title} placeholder='Title' />:null}
           <textarea name="data" id="" onChange={inputEvent} value={store.data} placeholder='Write Your Note Here...' cols="" rows="" onClick={edit}></textarea>
@@ -64,6 +68,9 @@ function App() {
           </span>:null}
         </form>
       </div>
+      {singleclk === false ? <div className='Show_ExtraSpace'><center><p>Click Here To Write📝...</p></center></div> : singleclk === true ? <div className='Hide_ExtraSpace'><center><p>Double Click To Hide</p></center></div>:null}
+      
+      
       <div className="Mid">
         {Val.map((Elem, index) => {
           return <Cards key={index} id={index} title={Elem.title} data={Elem.data} deleteItem ={deleteI}/>
